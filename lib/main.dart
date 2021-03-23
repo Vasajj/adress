@@ -11,32 +11,17 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
-<<<<<<< HEAD
-      home: HomeView(),
-=======
       home: ScrollingDate(),
 
       //  есть два варианта у меня: или ScrollingDate или Pixels:
       //  в первом случае не могу дату поменять в хедере, а в другом не знаю, как вместо пикселей внедрить дату
       // короче, проблема в хедеры дату вставить, которая из сети будет приходить
 
->>>>>>> Initial commit
     );
   }
 }
 
-<<<<<<< HEAD
-class HomeView extends StatefulWidget {
-  @override
-  _HomeViewState createState() => _HomeViewState();
-}
 
-class _HomeViewState extends State<HomeView> {
-  String _timeString;
-  var scrollController = ScrollController();
-  String appBarTitle = "Date from ListView";
-
-=======
 class ScrollingDate extends StatefulWidget {
   @override
   _ScrollingDateState createState() => _ScrollingDateState();
@@ -46,24 +31,16 @@ class _ScrollingDateState extends State<ScrollingDate> {
   String _timeString;
   var scrollController = ScrollController();
   String appBarTitle = "Initial Value";
->>>>>>> Initial commit
 
   void _scrollListener() {
     if (scrollController.offset != scrollController.position.minScrollExtent &&
         !scrollController.position.outOfRange) {
-<<<<<<< HEAD
       // at bottom
       // change the value of the AppBar string
       setState(() {
         appBarTitle = _timeString;
       });
       }
-=======
-      setState(() {
-        appBarTitle = _timeString;
-      });
-    }
->>>>>>> Initial commit
   }
 
   @override
@@ -97,21 +74,11 @@ class _ScrollingDateState extends State<ScrollingDate> {
         appBar: AppBar(
           title: Text(appBarTitle),
         ),
-<<<<<<< HEAD
 
-
-        body: ListView.builder(
-
-            controller: scrollController,
-            itemBuilder: (context, index) {
-              return StickyHeader(
-
-=======
         body: ListView.builder(
             controller: scrollController,
             itemBuilder: (context, index) {
               return StickyHeader(
->>>>>>> Initial commit
                 header: Container(
                   height: 70.0,
                   color: Colors.white,
@@ -172,8 +139,7 @@ class _ScrollingDateState extends State<ScrollingDate> {
   }
 }
 
-<<<<<<< HEAD
-=======
+
 class Pixels extends StatefulWidget {
   Pixels({Key key}) : super(key: key);
 
@@ -219,4 +185,3 @@ class _PixelsState extends State<Pixels> {
     );
   }
 }
->>>>>>> Initial commit
