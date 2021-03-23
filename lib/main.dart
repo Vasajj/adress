@@ -16,11 +16,9 @@ class MyApp extends StatelessWidget {
       //  есть два варианта у меня: или ScrollingDate или Pixels:
       //  в первом случае не могу дату поменять в хедере, а в другом не знаю, как вместо пикселей внедрить дату
       // короче, проблема в хедеры дату вставить, которая из сети будет приходить
-
     );
   }
 }
-
 
 class ScrollingDate extends StatefulWidget {
   @override
@@ -40,7 +38,7 @@ class _ScrollingDateState extends State<ScrollingDate> {
       setState(() {
         appBarTitle = _timeString;
       });
-      }
+    }
   }
 
   @override
@@ -60,13 +58,7 @@ class _ScrollingDateState extends State<ScrollingDate> {
     });
   }
 
-  BoxDecoration myBoxDecoration() {
-    return BoxDecoration(
-      border: Border.all(
-        width: 3, //
-      ),
-    );
-  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -74,7 +66,6 @@ class _ScrollingDateState extends State<ScrollingDate> {
         appBar: AppBar(
           title: Text(appBarTitle),
         ),
-
         body: ListView.builder(
             controller: scrollController,
             itemBuilder: (context, index) {
@@ -93,52 +84,12 @@ class _ScrollingDateState extends State<ScrollingDate> {
                 ),
                 content: Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: Container(
-                    decoration: myBoxDecoration(),
-                    child: Center(
-                      child: Row(
-                        children: <Widget>[
-                          ClipRRect(
-                            child: Icon(
-                              Icons.home_rounded,
-                              size: 80.00,
-                            ),
-                          ),
-                          Expanded(
-                            child: Padding(
-                              padding: EdgeInsets.all(10.0),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: <Widget>[
-                                  Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Text(
-                                      'Город, улица',
-                                      style: TextStyle(fontSize: 30.0),
-                                    ),
-                                  ),
-                                  Text(
-                                    'Отключение: с _______  до ________',
-                                    style: TextStyle(fontSize: 15.0),
-                                  ),
-                                  Text('Отключение: с _______  до ________',
-                                      style: TextStyle(fontSize: 15.0)),
-
-                                  // ),
-                                ],
-                              ),
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
-                  ),
+                  child: Tile()
                 ),
               );
             }));
   }
 }
-
 
 class Pixels extends StatefulWidget {
   Pixels({Key key}) : super(key: key);
@@ -182,6 +133,62 @@ class _PixelsState extends State<Pixels> {
           );
         },
       )),
+    );
+  }
+}
+
+class Tile extends StatelessWidget {
+
+  BoxDecoration myBoxDecoration() {
+    return BoxDecoration(
+      border: Border.all(
+        width: 3, //
+      ),
+    );
+  }
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: Container(
+        decoration: myBoxDecoration(),
+        child: Center(
+          child: Row(
+            children: <Widget>[
+              ClipRRect(
+                child: Icon(
+                  Icons.home_rounded,
+                  size: 80.00,
+                ),
+              ),
+              Expanded(
+                child: Padding(
+                  padding: EdgeInsets.all(10.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(
+                          'Город, улица',
+                          style: TextStyle(fontSize: 30.0),
+                        ),
+                      ),
+                      Text(
+                        'Отключение: с _______  до ________',
+                        style: TextStyle(fontSize: 15.0),
+                      ),
+                      Text('Отключение: с _______  до ________',
+                          style: TextStyle(fontSize: 15.0)),
+
+                      // ),
+                    ],
+                  ),
+                ),
+              )
+            ],
+          ),
+        ),
+      ),
     );
   }
 }
