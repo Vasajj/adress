@@ -1,44 +1,47 @@
 import 'dart:core';
-
 import 'package:flutter/material.dart';
 import 'package:grouped_list/grouped_list.dart';
-import 'package:intl/intl.dart';
+import 'package:tileboxes/location_model.dart';
+import 'date_group_separator.dart';
 
 void main() {
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  final List<CardModel> fields = [
-    CardModel("Ужгород", "вул.Шумна", "18:00", "19:00", "18:00", "19:00",
+
+
+  final List<LocationModel> fields = [
+    LocationModel("Ужгород", "вул.Шумна", "18:00", "19:00", "18:00", "19:00",
         (DateTime.now())),
-    CardModel("Ужгород", "вул.Капушанська", "18:00", "19:00", "18:00", "19:00",
-        DateTime(2020, 7, 7)),
-    CardModel("Ужгород", "вул.Загорська", "18:00", "21:00", "18:00", "19:00",
-        DateTime(2020, 7, 7)),
-    CardModel("Ужгород", "вул.Петефі", "18:00", "22:00", "18:00", "19:00",
-        DateTime(2020, 9, 7)),
-    CardModel("Ужгород", "вул.Шумна", "15:00", "16:45", "18:00", "19:00",
-        DateTime(2020, 9, 7)),
-    CardModel("Ужгород", "вул.Петефі", "18:00", "19:00", "18:00", "19:00",
-        DateTime(2020, 14, 7)),
-    CardModel("Ужгород", "вул.Швабська", "18:00", "19:00", "18:00", "19:00",
-        DateTime(2020, 14, 7)),
-    CardModel("Ужгород", "вул.Легоцького", "18:00", "20:00", "18:00", "19:00",
-        DateTime(2020, 14, 7)),
-    CardModel("Ужгород", "вул.Шумна", "15:00", "16:30", "18:00", "19:00",
-        DateTime(2020, 14, 7)),
-    CardModel("Ужгород", "вул.Капушанська", "18:00", "19:00", "18:00", "19:00",
-        DateTime(2020, 14, 3)),
-    CardModel("Ужгород", "вул.Гагаріна", "18:00", "19:00", "18:00", "19:00",
-        DateTime(2020, 15, 2)),
-    CardModel("Ужгород", "вул.Петефі", "13:00", "19:00", "18:00", "19:00",
-        DateTime(2020, 15, 2)),
-    CardModel("Ужгород", "вул.Швабська", "18:00", "19:00", "18:00", "19:00",
-        DateTime(2020, 15, 2)),
-    CardModel("Ужгород", "вул.Загорська", "10:00", "19:00", "18:00", "19:00",
-        DateTime(2020, 15, 7)),
+    LocationModel("Ужгород", "вул.Капушанська", "18:00", "19:00", "18:00", "19:00",
+        DateTime(2021, 7, 7)),
+    LocationModel("Ужгород", "вул.Загорська", "18:00", "21:00", "18:00", "19:00",
+        DateTime(2021, 7, 7)),
+    LocationModel("Ужгород", "вул.Петефі", "18:00", "22:00", "18:00", "19:00",
+        DateTime(2021, 9, 7)),
+    LocationModel("Ужгород", "вул.Шумна", "15:00", "16:45", "18:00", "19:00",
+        DateTime(2021, 9, 7)),
+    LocationModel("Ужгород", "вул.Петефі", "18:00", "19:00", "18:00", "19:00",
+        DateTime(2021, 10, 7)),
+    LocationModel("Ужгород", "вул.Швабська", "18:00", "19:00", "18:00", "19:00",
+        DateTime(2021, 11, 7)),
+    LocationModel("Ужгород", "вул.Легоцького", "18:00", "20:00", "18:00", "19:00",
+        DateTime(2021, 8, 7)),
+    LocationModel("Ужгород", "вул.Шумна", "15:00", "16:30", "18:00", "19:00",
+        DateTime(2021, 6, 7)),
+    LocationModel("Ужгород", "вул.Капушанська", "18:00", "19:00", "18:00", "19:00",
+        DateTime(2021, 6, 8)),
+    LocationModel("Ужгород", "вул.Гагаріна", "18:00", "19:00", "18:00", "19:00",
+        DateTime(2021, 6, 8)),
+    LocationModel("Ужгород", "вул.Петефі", "13:00", "19:00", "18:00", "19:00",
+        DateTime(2021, 3, 9)),
+    LocationModel("Ужгород", "вул.Швабська", "18:00", "19:00", "18:00", "19:00",
+        DateTime(2021, 2, 9)),
+    LocationModel("Ужгород", "вул.Загорська", "10:00", "19:00", "18:00", "19:00",
+        DateTime(2021, 5, 12)),
   ];
+
 
   BoxDecoration myBoxDecoration() {
     return BoxDecoration(
@@ -95,8 +98,6 @@ class MyApp extends StatelessWidget {
                             ),
                             Text("Відключення: з ${fields.begin2}  до ${fields.till2} ",
                                 style: TextStyle(fontSize: 15.0)),
-
-                            // ),
                           ],
                         ),
                       ),
@@ -104,14 +105,6 @@ class MyApp extends StatelessWidget {
                   ],
                 ),
               ),
-
-              // ListTile(
-              //   title: Text(transaction.name),
-              //   trailing: Text(
-              //     "\$ ${transaction.amount}",
-              //     style: TextStyle(fontWeight: FontWeight.w500, fontSize: 16),
-              //   ),
-              // ),
             ),
           ),
         ),
@@ -120,38 +113,15 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class DateGroupSeparator extends StatelessWidget {
-  final DateTime date;
-  DateGroupSeparator({this.date});
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: 60.0,
-      child: Center(
-        child: Text(
-          "${DateFormat.yMMMMd().format(date)}",
-          style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
-        ),
-      ),
-    );
-  }
-}
 
 
 
 
-class CardModel {
-  final DateTime date;
-  final String city;
-  final String street;
-  final String begin1;
-  final String till1;
-  final String begin2;
-  final String till2;
 
-  CardModel(this.city, this.street, this.begin1, this.till1, this.begin2,
-      this.till2, this.date);
-}
+
+
+
+
 
 //
 // import 'dart:async';
