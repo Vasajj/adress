@@ -9,20 +9,34 @@ void main() {
 
 class MyApp extends StatelessWidget {
   final List<CardModel> fields = [
-    CardModel("Ужгород", "вул.Шумна", "18:00", "19:00", "18:00", "19:00",        (DateTime.now())),
-    CardModel("Ужгород", "вул.Капушанська", "18:00", "19:00", "18:00", "19:00",        DateTime.utc(2020, 7, 7)),
-    CardModel("Ужгород", "вул.Загорська", "18:00", "19:00", "18:00", "19:00",        DateTime.utc(2020, 7, 7)),
-    CardModel("Ужгород", "вул.Петефі", "18:00", "19:00", "18:00", "19:00",        DateTime.utc(2020, 9, 7)),
-    CardModel("Ужгород", "вул.Шумна", "18:00", "19:00", "18:00", "19:00",        DateTime.utc(2020, 9, 7)),
-    CardModel("Ужгород", "вул.Петефі", "18:00", "19:00", "18:00", "19:00",        DateTime.utc(2020, 14, 7)),
-    CardModel("Ужгород", "вул.Швабська", "18:00", "19:00", "18:00", "19:00",        DateTime.utc(2020, 14, 7)),
-    CardModel("Ужгород", "вул.Легоцького", "18:00", "19:00", "18:00", "19:00",        DateTime.utc(2020, 14, 7)),
-    CardModel("Ужгород", "вул.Шумна", "18:00", "19:00", "18:00", "19:00",        DateTime.utc(2020, 14, 7)),
-    CardModel("Ужгород", "вул.Капушанська", "18:00", "19:00", "18:00", "19:00",        DateTime.utc(2020, 14, 3)),
-    CardModel("Ужгород", "вул.Гагаріна", "18:00", "19:00", "18:00", "19:00",        DateTime.utc(2020, 15, 2)),
-    CardModel("Ужгород", "вул.Петефі", "18:00", "19:00", "18:00", "19:00",        DateTime.utc(2020, 15, 2)),
-    CardModel("Ужгород", "вул.Швабська", "18:00", "19:00", "18:00", "19:00",        DateTime.utc(2020, 15, 2)),
-    CardModel("Ужгород", "вул.Загорська", "18:00", "19:00", "18:00", "19:00",        DateTime.utc(2020, 15, 7)),
+    CardModel("Ужгород", "вул.Шумна", "18:00", "19:00", "18:00", "19:00",
+        (DateTime.now())),
+    CardModel("Ужгород", "вул.Капушанська", "18:00", "19:00", "18:00", "19:00",
+        DateTime.utc(2020, 7, 7)),
+    CardModel("Ужгород", "вул.Загорська", "18:00", "21:00", "18:00", "19:00",
+        DateTime.utc(2020, 7, 7)),
+    CardModel("Ужгород", "вул.Петефі", "18:00", "22:00", "18:00", "19:00",
+        DateTime.utc(2020, 9, 7)),
+    CardModel("Ужгород", "вул.Шумна", "15:00", "16:45", "18:00", "19:00",
+        DateTime.utc(2020, 9, 7)),
+    CardModel("Ужгород", "вул.Петефі", "18:00", "19:00", "18:00", "19:00",
+        DateTime.utc(2020, 14, 7)),
+    CardModel("Ужгород", "вул.Швабська", "18:00", "19:00", "18:00", "19:00",
+        DateTime.utc(2020, 14, 7)),
+    CardModel("Ужгород", "вул.Легоцького", "18:00", "20:00", "18:00", "19:00",
+        DateTime.utc(2020, 14, 7)),
+    CardModel("Ужгород", "вул.Шумна", "15:00", "16:30", "18:00", "19:00",
+        DateTime.utc(2020, 14, 7)),
+    CardModel("Ужгород", "вул.Капушанська", "18:00", "19:00", "18:00", "19:00",
+        DateTime.utc(2020, 14, 3)),
+    CardModel("Ужгород", "вул.Гагаріна", "18:00", "19:00", "18:00", "19:00",
+        DateTime.utc(2020, 15, 2)),
+    CardModel("Ужгород", "вул.Петефі", "13:00", "19:00", "18:00", "19:00",
+        DateTime.utc(2020, 15, 2)),
+    CardModel("Ужгород", "вул.Швабська", "18:00", "19:00", "18:00", "19:00",
+        DateTime.utc(2020, 15, 2)),
+    CardModel("Ужгород", "вул.Загорська", "10:00", "19:00", "18:00", "19:00",
+        DateTime.utc(2020, 15, 7)),
   ];
 
   BoxDecoration myBoxDecoration() {
@@ -40,15 +54,15 @@ class MyApp extends StatelessWidget {
         child: Scaffold(
           body: GroupedListView<dynamic, DateTime>(
             elements: fields,
-            groupBy: (transaction) {
-              return transaction.date;
+            groupBy: (fields) {
+              return fields.date;
             },
             groupSeparatorBuilder: (DateTime date) => DateGroupSeparator(
               date: date,
             ),
             order: GroupedListOrder.ASC,
             useStickyGroupSeparators: true,
-            itemBuilder: (context, dynamic transaction) => Card(
+            itemBuilder: (context, dynamic fields) => Card(
               child: Container(
                 decoration: myBoxDecoration(),
                 child: Row(
@@ -67,16 +81,18 @@ class MyApp extends StatelessWidget {
                           children: <Widget>[
                             Padding(
                               padding: const EdgeInsets.all(8.0),
-                              child: Text(
-                                '',
-                                style: TextStyle(fontSize: 30.0),
+                              child: Container(
+                                child: Text(
+                                  "${fields.city}, ${fields.street}",
+                                  style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
+                                ),
                               ),
                             ),
                             Text(
-                              "Відключення: з   до ",
+                              "Відключення: з ${fields.begin1}  до ${fields.till1} ",
                               style: TextStyle(fontSize: 15.0),
                             ),
-                            Text('Відключення: з _______  до ________',
+                            Text("Відключення: з ${fields.begin2}  до ${fields.till2} ",
                                 style: TextStyle(fontSize: 15.0)),
 
                             // ),
@@ -106,15 +122,15 @@ class MyApp extends StatelessWidget {
 class DateGroupSeparator extends StatelessWidget {
   final DateTime date;
   DateGroupSeparator({this.date});
-
+  var berlinWallFell = DateTime.utc(1989, DateTime.november, 9);
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Padding(
-        padding: EdgeInsets.only(left: 16, top: 8, bottom: 8),
+      height: 60.0,
+      child: Center(
         child: Text(
           "${this.date.day}/${this.date.month}/${this.date.year}",
-          style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+          style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
         ),
       ),
     );
