@@ -2,6 +2,7 @@ import 'dart:core';
 
 import 'package:flutter/material.dart';
 import 'package:grouped_list/grouped_list.dart';
+import 'package:intl/intl.dart';
 
 void main() {
   runApp(MyApp());
@@ -12,31 +13,31 @@ class MyApp extends StatelessWidget {
     CardModel("Ужгород", "вул.Шумна", "18:00", "19:00", "18:00", "19:00",
         (DateTime.now())),
     CardModel("Ужгород", "вул.Капушанська", "18:00", "19:00", "18:00", "19:00",
-        DateTime.utc(2020, 7, 7)),
+        DateTime(2020, 7, 7)),
     CardModel("Ужгород", "вул.Загорська", "18:00", "21:00", "18:00", "19:00",
-        DateTime.utc(2020, 7, 7)),
+        DateTime(2020, 7, 7)),
     CardModel("Ужгород", "вул.Петефі", "18:00", "22:00", "18:00", "19:00",
-        DateTime.utc(2020, 9, 7)),
+        DateTime(2020, 9, 7)),
     CardModel("Ужгород", "вул.Шумна", "15:00", "16:45", "18:00", "19:00",
-        DateTime.utc(2020, 9, 7)),
+        DateTime(2020, 9, 7)),
     CardModel("Ужгород", "вул.Петефі", "18:00", "19:00", "18:00", "19:00",
-        DateTime.utc(2020, 14, 7)),
+        DateTime(2020, 14, 7)),
     CardModel("Ужгород", "вул.Швабська", "18:00", "19:00", "18:00", "19:00",
-        DateTime.utc(2020, 14, 7)),
+        DateTime(2020, 14, 7)),
     CardModel("Ужгород", "вул.Легоцького", "18:00", "20:00", "18:00", "19:00",
-        DateTime.utc(2020, 14, 7)),
+        DateTime(2020, 14, 7)),
     CardModel("Ужгород", "вул.Шумна", "15:00", "16:30", "18:00", "19:00",
-        DateTime.utc(2020, 14, 7)),
+        DateTime(2020, 14, 7)),
     CardModel("Ужгород", "вул.Капушанська", "18:00", "19:00", "18:00", "19:00",
-        DateTime.utc(2020, 14, 3)),
+        DateTime(2020, 14, 3)),
     CardModel("Ужгород", "вул.Гагаріна", "18:00", "19:00", "18:00", "19:00",
-        DateTime.utc(2020, 15, 2)),
+        DateTime(2020, 15, 2)),
     CardModel("Ужгород", "вул.Петефі", "13:00", "19:00", "18:00", "19:00",
-        DateTime.utc(2020, 15, 2)),
+        DateTime(2020, 15, 2)),
     CardModel("Ужгород", "вул.Швабська", "18:00", "19:00", "18:00", "19:00",
-        DateTime.utc(2020, 15, 2)),
+        DateTime(2020, 15, 2)),
     CardModel("Ужгород", "вул.Загорська", "10:00", "19:00", "18:00", "19:00",
-        DateTime.utc(2020, 15, 7)),
+        DateTime(2020, 15, 7)),
   ];
 
   BoxDecoration myBoxDecoration() {
@@ -122,20 +123,22 @@ class MyApp extends StatelessWidget {
 class DateGroupSeparator extends StatelessWidget {
   final DateTime date;
   DateGroupSeparator({this.date});
-  var berlinWallFell = DateTime.utc(1989, DateTime.november, 9);
   @override
   Widget build(BuildContext context) {
     return Container(
       height: 60.0,
       child: Center(
         child: Text(
-          "${this.date.day}/${this.date.month}/${this.date.year}",
+          "${DateFormat.yMMMMd().format(date)}",
           style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
         ),
       ),
     );
   }
 }
+
+
+
 
 class CardModel {
   final DateTime date;
